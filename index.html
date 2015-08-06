@@ -10,14 +10,27 @@
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
   <!-- Reatc Rating component -->
   <script src="node_modules/react/dist/react.js"></script>
-  <script src="lib/rating-app.js"></script>
 
-  </script>
 
-  </script>
+  <style type="text/css">
+  .low{
+    color:red;
+  }
+  .medium {
+    color: orange;
+  }
+  .high {
+    color: green;
+  }
+  </style>
+
 </head>
 
 <body>
+  <h3> Default ratings </h3>
+  <div class="rating" id="rating-default"></div>
+  <h3> Readonly rating </h3>
+  <div class="rating" id="rating-default-readonly"></div>
 </body>
-
+<script src="lib/rating-app.js"></script>
 </html>

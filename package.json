@@ -2,7 +2,7 @@
   "name": "rating-application",
   "version": "1.0.0",
   "description": "A Rating app based on react JS",
-  "main": "lib/rating-app.js",
+  "main": "src/rating-app.jsx",
   "files": [
     "README.md",
     "LICENSE.md",
@@ -11,7 +11,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --color --port 8080",
-    "build": "BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating.min.js --progress"
+    "build": "BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating.min.js --progress",
+    "development": "watchify --ignore-watch=node_modules/** -v -d -t reactify src/index.jsx -o lib/rating-app.js"
+
   },
   "repository": {
     "type": "git",
@@ -42,6 +44,7 @@
     "font-awesome": "^4.3.0",
     "node-libs-browser": "^0.5.2",
     "webpack": "^1.10.1",
-    "webpack-dev-server": "^1.10.1"
+    "webpack-dev-server": "^1.10.1",
+    "reactify": "*"
   }
 }
