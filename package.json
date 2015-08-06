@@ -1,0 +1,47 @@
+{
+  "name": "rating-application",
+  "version": "1.0.0",
+  "description": "A Rating app based on react JS",
+  "main": "lib/rating-app.js",
+  "files": [
+    "README.md",
+    "LICENSE.md",
+    "lib/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --progress --color --port 8080",
+    "build": "BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating.min.js --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prince1809/rating-application.git"
+  },
+  "keywords": [
+    "rating",
+    "react",
+    "component",
+    "react-component",
+    "bootstrap",
+    "fontawesome"
+  ],
+  "author": "Prince Kumar (prince18pat@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prince1809/rating-application/issues"
+  },
+  "homepage": "https://github.com/prince1809/rating-application#readme",
+  "peerDependencies": {
+    "react": ">=0.13.0"
+  },
+  "devDependencies": {
+    "react": "^0.13.3",
+    "babel-core": "^5.7.4",
+    "babel-loader": "^5.3.2",
+    "bootstrap": "^3.3.5",
+    "font-awesome": "^4.3.0",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.10.1",
+    "webpack-dev-server": "^1.10.1"
+  }
+}
