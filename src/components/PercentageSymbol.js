@@ -26,16 +26,21 @@ var PercentageSymbol = React.createClass({
     display: 'inline-block',
     position: 'relative'
   };
+  console.log(this.props.onMouseDown);
     return(
       <span style={style}
         onMouseDown = {this.props.onMouseDown}
         onMouseOver={this.props.onMouseOver}
+        onMouseLeave={this.props.onMouseLeave}
+        onMouseMove={this.props.onMouseMove}
         >
         {backgroundNode}
+        <div style={iconContainerStyle}>
+          {iconNode}
+        </div>
       </span>
     );
   }
-
 });
 
 module.exports = PercentageSymbol;

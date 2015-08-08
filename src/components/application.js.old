@@ -36,12 +36,6 @@ var Application = React.createClass({
     var index = i + this._fractionalIndex(event);
 
   },
-  handleMouseLeave: function(i,event){
-    console.log('mouse left');
-  },
-  handleMouseMove: function(i,event){
-    console.log('moving');
-  },
   _initialIndex: function(props){
     if(this._contains(props.initialRate)){
       console.log(props.initialRate);
