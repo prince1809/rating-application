@@ -40,7 +40,18 @@ var Application = React.createClass({
     console.log('mouse left');
   },
   handleMouseMove: function(i,event){
-    console.log('moving');
+    var index = i + this._fractionalIndex(event);
+    if(this.state.indexOver !== index){
+      this.props.onRate(this._indexToRate(index));
+      this.setState({
+        indexOver: index
+      });
+    }
+  },
+  // calculate the rate of an index according to the start and step
+  _indexToRate: function(index){
+    return this.props.start + Math.floor(index) * this.props.step +
+    this.props.step * this._roundToFraction(index % 1);
   },
   _initialIndex: function(props){
     if(this._contains(props.initialRate)){
@@ -94,8 +105,6 @@ var Application = React.createClass({
            onMouseLeave={this.handleMouseLeave.bind(this,i)}
            onMouseMove={this.handleMouseMove.bind(this,i)}
           />);
-          console.log(symbolNodes);
-
     }
 
     return(
