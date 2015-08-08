@@ -31,6 +31,9 @@ var Application = React.createClass({
       index: this._initialIndex(nextProps)
     });
   },
+  handleMouseDown: function(i,event){
+    var index = i + this._fractionalIndex(event);
+  },
   _initialIndex: function(props){
     if(this._contains(props.initialRate)){
       console.log(props.initialRate);
@@ -43,6 +46,21 @@ var Application = React.createClass({
     var stop = this.props.step > 0 ? this.props.stop : this.props.start;
     return start <= rate && rate <= stop;
   },
+  // calculate the corresponding index for a rate.
+  _rateToIndex: function(rate){
+    return (rate - this.props.start) / this.props.step;
+  },
+  _fractionalIndex: function(event){
+    var x = event.clientX - event.currentTarget.getBoundingClientRect().left;
+    return this._roundToFraction(x/event.currentTarget.offsetWidth);
+  },
+  _roundToFraction: function(index){
+    //Get the closeset top fraction.
+    var fraction = Math.ceil(index % 1 * this.props.fractions) / this.props.fractions;
+    //Truncate decimal trying to avoid float precission issues.
+    var precission = Math.pow(10,this.props.scale);
+    return Math.floor(index) + Math.floor(fraction * precission) / precission;
+  },
 
   render: function(){
     var symbolNodes = [];
@@ -52,7 +70,25 @@ var Application = React.createClass({
     var index = this.state.indexOver !== undefined ? this.state.indexOver : this.state.index;
     // The index of the last full symbol or NaN if index is undefined.
     var lastFullIndex = Math.floor(index);
-    console.log(lastFullIndex);
+
+    for( var i=0; i < this._rateToIndex(this.props.stop); i++){
+      //Return the percentage of the decimal part of the last full index,
+      // 100 percent for those below the last full index or 0 percent for thoaw
+      // indexes NaN or above the last full index.
+      var percent = i - lastFullIndex === 0 ? index % 1*100: i - lastFullIndex < 0 ? 100 : 0;
+
+      symbolNodes.push(<Symbol
+           key={i}
+           background={empty[i%empty.length]}
+           icon = {full[i%full.length]}
+           percent={percent}
+           onMouseDown={this.props.readOnly && this.handleMouseDown.bind(this,i)}
+           onMouseLeave={this.props.readOnly && this.handleMouseLeave.bind(this,i)}
+           onMouseMove={this.props.readOnly && this.handleMouseMove.bind(this,i)}
+          />);
+
+    }
+    console.log(symbolNodes);
     return(
       <span>
       {symbolNodes}
