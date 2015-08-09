@@ -32,12 +32,20 @@ var Application = React.createClass({
     });
   },
   handleMouseDown: function(i,event){
-      console.log(i);
     var index = i + this._fractionalIndex(event);
-
+    if(this.state.index !== index){
+      this.props.onChange(this._indexToRate(index));
+      this.setState({
+        index: index
+      });
+    }
+    console.log(this._indexToRate(index));
   },
   handleMouseLeave: function(i,event){
-    console.log('mouse left');
+    this.props.onRate();
+    this.setState({
+      indexOver: undefined
+    });
   },
   handleMouseMove: function(i,event){
     var index = i + this._fractionalIndex(event);
@@ -55,8 +63,7 @@ var Application = React.createClass({
   },
   _initialIndex: function(props){
     if(this._contains(props.initialRate)){
-      console.log(props.initialRate);
-      //return this._rateToIndex(props.initialRate);
+      return this._rateToIndex(props.initialRate);
     }
   },
   //check the rate is in the properrange [ start ... stop].

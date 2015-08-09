@@ -26,7 +26,6 @@ var PercentageSymbol = React.createClass({
     display: 'inline-block',
     position: 'relative'
   };
-  console.log(this.props.onMouseDown);
     return(
       <span style={style}
         onMouseDown = {this.props.onMouseDown}
